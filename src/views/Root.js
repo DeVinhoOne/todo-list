@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import theme from '../theme/theme';
 import GlobalStyle from '../theme/GlobalStyle';
 import AddButton from '../components/atoms/AddButton/AddButton';
+import Input from '../components/atoms/Input/Input';
 
 const StyledHeading = styled.h1`
   font-size: 3.2rem;
@@ -15,6 +16,7 @@ const Root = () => (
       <GlobalStyle />
       <StyledHeading>Witaj</StyledHeading>
       <AddButton>Add</AddButton>
+      <Input />
     </>
   </ThemeProvider>
 );

@@ -1,7 +1,6 @@
 const theme = {
   darkBackground: 'hsl(0, 0%, 5%)',
   lightGray: 'hsl(0, 0%, 90%)',
-  darkerGray: 'hsl(0, 0%, 80%)',
   pink: 'hsl(346, 100%, 63%)',
   orange: 'hsl(9, 100%, 58%)',
   font: {

@@ -25,8 +25,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const DeleteButton = () => (
-  <StyledButton>
+const DeleteButton = ({ className }) => (
+  <StyledButton className={className}>
     <StyledIcon src={deleteIcon} alt="" />
   </StyledButton>
 );

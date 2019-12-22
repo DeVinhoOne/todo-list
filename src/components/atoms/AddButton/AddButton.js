@@ -8,6 +8,7 @@ const AddButton = styled.button`
   border-radius: 50px;
   color: ${({ theme }) => theme.lightGray};
   border: none;
+  padding: 0;
   background: linear-gradient(90deg, hsl(346, 100%, 63%) 0%, hsl(9, 100%, 58%) 100%);
   box-shadow: 0px 0px 10px rgba(230, 230, 230, 0.3);
   cursor: pointer;

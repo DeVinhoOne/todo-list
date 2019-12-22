@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: 45px;
   position: relative;
   width: 500px;
   height: 30px;
@@ -45,6 +45,7 @@ const StyledInput = styled.input`
   font-weight: 300;
   font-size: 2.2rem;
   z-index: 1;
+  padding: 0;
 
   &:focus ~ ${StyledLabel} {
     transform: translateY(-100%);

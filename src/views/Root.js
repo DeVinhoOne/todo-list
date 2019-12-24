@@ -24,6 +24,11 @@ const Root = () => {
     }
   };
 
+  const handleTaskDelete = index => {
+    const newArray = tasks.filter((task, i) => i !== index);
+    setTasks(newArray);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <StyledWrapper>
@@ -33,8 +38,10 @@ const Root = () => {
           handleChange={text => handleInputChange(text)}
           handleAddition={handleTaskAddition}
         />
-        {tasks.map(task => (
-          <Task>{task}</Task>
+        {tasks.map((task, index) => (
+          <Task handleDelete={() => handleTaskDelete(index)} key={index}>
+            {task}
+          </Task>
         ))}
       </StyledWrapper>
     </ThemeProvider>

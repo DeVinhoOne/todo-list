@@ -11,7 +11,10 @@ const StyledIcon = styled.img`
 `;
 
 const StyledButton = styled.button`
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
   width: 40px;
   height: 40px;
   background: linear-gradient(90deg, hsl(346, 100%, 63%) 0%, hsl(9, 100%, 58%) 100%);
@@ -19,6 +22,7 @@ const StyledButton = styled.button`
   border-radius: 50%;
   border: none;
   cursor: pointer;
+  z-index: 2;
 
   &:hover ${StyledIcon} {
     transform: translate(-50%, -50%) rotate(90deg);

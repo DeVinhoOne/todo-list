@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import DeleteButton from '../DeleteButton/DeleteButton';
 
 const StyledWrapper = styled.div`
+  position: relative;
+  margin-top: 40px;
   width: 770px;
   height: 100px;
   background: linear-gradient(270deg, hsl(346, 100%, 63%) 0%, hsl(9, 100%, 58%) 100%);
@@ -18,6 +21,7 @@ const StyledParagraph = styled.p`
 
 const Task = ({ children }) => (
   <StyledWrapper>
+    <DeleteButton />
     <StyledParagraph>{children}</StyledParagraph>
   </StyledWrapper>
 );

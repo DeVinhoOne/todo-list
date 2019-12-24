@@ -53,15 +53,15 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = () => {
-  //   const [active, setActive] = useState(false);
-
-  //   const handleActiveChange = () => setActive(!active);
-  //   console.log(active);
-
+const Input = ({ handleChange, value }) => {
   return (
     <StyledWrapper>
-      <StyledInput type="text" id="task" />
+      <StyledInput
+        value={value}
+        onChange={e => handleChange(e.target.value)}
+        type="text"
+        id="task"
+      />
       <StyledLabel htmlFor="task">Enter Your Todo..</StyledLabel>
     </StyledWrapper>
   );

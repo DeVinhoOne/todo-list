@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from 'styled-components';
 
-const AddButton = styled.button`
+const StyledButton = styled.button`
   width: 250px;
   height: 75px;
   font-size: 2.6rem;
@@ -18,5 +19,7 @@ const AddButton = styled.button`
     box-shadow: 0px 0px 15px rgba(230, 230, 230, 0.4);
   }
 `;
+
+const AddButton = ({ handleAddition }) => <StyledButton onClick={handleAddition}>Add</StyledButton>;
 
 export default AddButton;

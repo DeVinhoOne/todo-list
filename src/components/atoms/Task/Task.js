@@ -19,9 +19,9 @@ const StyledParagraph = styled.p`
   padding: 0;
 `;
 
-const Task = ({ children, handleDelete }) => (
+const Task = ({ children }) => (
   <StyledWrapper>
-    <DeleteButton handleDelete={handleDelete} />
+    <DeleteButton />
     <StyledParagraph>{children}</StyledParagraph>
   </StyledWrapper>
 );

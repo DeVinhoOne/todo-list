@@ -5,6 +5,7 @@ import GlobalStyle from '../theme/GlobalStyle';
 import Panel from '../components/molecules/Panel/Panel';
 import Task from '../components/atoms/Task/Task';
 import { ValueContext } from '../context/value-context';
+import { DeleteContext } from '../context/delete-context';
 
 const StyledWrapper = styled.div`
   margin-top: 100px;
@@ -34,6 +35,7 @@ const Root = () => {
     <ThemeProvider theme={theme}>
       <StyledWrapper>
         <GlobalStyle />
+
         <ValueContext.Provider
           value={{
             value,
@@ -43,10 +45,11 @@ const Root = () => {
         >
           <Panel />
         </ValueContext.Provider>
+
         {tasks.map((task, index) => (
-          <Task handleDelete={() => handleTaskDelete(index)} key={index}>
-            {task}
-          </Task>
+          <DeleteContext.Provider value={() => handleTaskDelete(index)}>
+            <Task key={index}>{task}</Task>
+          </DeleteContext.Provider>
         ))}
       </StyledWrapper>
     </ThemeProvider>

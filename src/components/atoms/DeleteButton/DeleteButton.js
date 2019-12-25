@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../../../assets/icons/delete.svg';
+import { DeleteContext } from '../../../context/delete-context';
 
 const StyledIcon = styled.img`
   position: absolute;
@@ -29,10 +30,14 @@ const StyledButton = styled.button`
   }
 `;
 
-const DeleteButton = ({ className, handleDelete }) => (
-  <StyledButton onClick={handleDelete} className={className}>
-    <StyledIcon src={deleteIcon} alt="" />
-  </StyledButton>
+const DeleteButton = ({ className }) => (
+  <DeleteContext.Consumer>
+    {value => (
+      <StyledButton onClick={value} className={className}>
+        <StyledIcon src={deleteIcon} alt="" />
+      </StyledButton>
+    )}
+  </DeleteContext.Consumer>
 );
 
 export default DeleteButton;

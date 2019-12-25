@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ValueContext } from '../../../context/value-context';
 
 const StyledButton = styled.button`
   width: 250px;
@@ -20,6 +21,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const AddButton = ({ handleAddition }) => <StyledButton onClick={handleAddition}>Add</StyledButton>;
+const AddButton = () => (
+  <ValueContext.Consumer>
+    {value => <StyledButton onClick={value.handleAddition}>Add</StyledButton>}
+  </ValueContext.Consumer>
+);
 
 export default AddButton;

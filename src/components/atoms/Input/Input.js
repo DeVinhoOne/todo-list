@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ValueContext } from '../../../context/value-context';
 
 const StyledWrapper = styled.div`
   margin-top: 45px;
@@ -53,15 +54,22 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ handleChange, value }) => {
+const Input = () => {
   return (
     <StyledWrapper>
-      <StyledInput
-        value={value}
-        onChange={e => handleChange(e.target.value)}
-        type="text"
-        id="task"
-      />
+      <ValueContext.Consumer>
+        {value => {
+          console.log(value);
+          return (
+            <StyledInput
+              value={value.value}
+              onChange={e => value.handleChange(e.target.value)}
+              type="text"
+              id="task"
+            />
+          );
+        }}
+      </ValueContext.Consumer>
       <StyledLabel htmlFor="task">Enter Your Todo..</StyledLabel>
     </StyledWrapper>
   );

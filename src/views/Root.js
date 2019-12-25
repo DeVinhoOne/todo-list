@@ -4,6 +4,7 @@ import theme from '../theme/theme';
 import GlobalStyle from '../theme/GlobalStyle';
 import Panel from '../components/molecules/Panel/Panel';
 import Task from '../components/atoms/Task/Task';
+import { ValueContext } from '../context/value-context';
 
 const StyledWrapper = styled.div`
   margin-top: 100px;
@@ -33,11 +34,15 @@ const Root = () => {
     <ThemeProvider theme={theme}>
       <StyledWrapper>
         <GlobalStyle />
-        <Panel
-          value={value}
-          handleChange={text => handleInputChange(text)}
-          handleAddition={handleTaskAddition}
-        />
+        <ValueContext.Provider
+          value={{
+            value,
+            handleChange: text => handleInputChange(text),
+            handleAddition: () => handleTaskAddition()
+          }}
+        >
+          <Panel />
+        </ValueContext.Provider>
         {tasks.map((task, index) => (
           <Task handleDelete={() => handleTaskDelete(index)} key={index}>
             {task}

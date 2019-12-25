@@ -9,10 +9,10 @@ const StyledWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Panel = ({ handleChange, handleAddition, value }) => (
+const Panel = () => (
   <StyledWrapper>
-    <Input value={value} handleChange={text => handleChange(text)} />
-    <AddButton handleAddition={handleAddition} />
+    <Input />
+    <AddButton />
   </StyledWrapper>
 );
 

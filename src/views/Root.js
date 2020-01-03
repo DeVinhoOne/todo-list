@@ -7,8 +7,11 @@ import Task from '../components/atoms/Task/Task';
 import { ValueContext } from '../context/value-context';
 import { DeleteContext } from '../context/delete-context';
 
-const StyledWrapper = styled.div`
-  margin-top: 100px;
+const TasksWrapper = styled.div`
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Root = () => {
@@ -22,7 +25,7 @@ const Root = () => {
       setTasks([...tasks, value]);
       setValue('');
     } else {
-      alert('Type something');
+      alert('Empty field. Please enter some todo.');
     }
   };
 
@@ -33,25 +36,23 @@ const Root = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <StyledWrapper>
-        <GlobalStyle />
-
-        <ValueContext.Provider
-          value={{
-            value,
-            handleChange: text => handleInputChange(text),
-            handleAddition: () => handleTaskAddition()
-          }}
-        >
-          <Panel />
-        </ValueContext.Provider>
-
+      <GlobalStyle />
+      <ValueContext.Provider
+        value={{
+          value,
+          handleChange: text => handleInputChange(text),
+          handleAddition: () => handleTaskAddition()
+        }}
+      >
+        <Panel />
+      </ValueContext.Provider>
+      <TasksWrapper>
         {tasks.map((task, index) => (
           <DeleteContext.Provider value={() => handleTaskDelete(index)}>
             <Task key={index}>{task}</Task>
           </DeleteContext.Provider>
         ))}
-      </StyledWrapper>
+      </TasksWrapper>
     </ThemeProvider>
   );
 };

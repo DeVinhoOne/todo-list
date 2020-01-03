@@ -7,8 +7,11 @@ const StyledIcon = styled.img`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.9);
   transition: transform 0.1s ease-in-out;
+  @media (min-width: 380px) {
+    transform: translate(-50%, -50%) scale(1);
+  }
 `;
 
 const StyledButton = styled.button`
@@ -16,8 +19,8 @@ const StyledButton = styled.button`
   top: 0;
   right: 0;
   transform: translate(50%, -50%);
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   background: linear-gradient(90deg, hsl(346, 100%, 63%) 0%, hsl(9, 100%, 58%) 100%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
@@ -25,8 +28,14 @@ const StyledButton = styled.button`
   cursor: pointer;
   z-index: 2;
 
-  &:hover ${StyledIcon} {
-    transform: translate(-50%, -50%) rotate(90deg);
+  @media (min-width: 380px) {
+    width: 40px;
+    height: 40px;
+  }
+  @media (min-width: 670px) {
+    &:hover ${StyledIcon} {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
   }
 `;
 

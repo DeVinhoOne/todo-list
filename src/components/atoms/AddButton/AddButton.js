@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ValueContext } from '../../../context/value-context';
 
 const StyledButton = styled.button`
-  width: 250px;
-  height: 75px;
-  font-size: 2.6rem;
+  width: 160px;
+  height: 48px;
+  font-size: 2.2rem;
   font-weight: 300;
   border-radius: 50px;
   color: ${({ theme }) => theme.lightGray};
@@ -14,10 +14,20 @@ const StyledButton = styled.button`
   background: linear-gradient(90deg, hsl(346, 100%, 63%) 0%, hsl(9, 100%, 58%) 100%);
   box-shadow: 0px 0px 10px rgba(230, 230, 230, 0.3);
   cursor: pointer;
-  transition: box-shadow 0.2s ease-in-out;
 
-  &:hover {
-    box-shadow: 0px 0px 15px rgba(230, 230, 230, 0.4);
+  @media (min-width: 380px) {
+    width: 200px;
+    height: 60px;
+    font-size: 2.4rem;
+  }
+
+  @media (min-width: 1000px) {
+    width: 230px;
+    height: 69px;
+    transition: box-shadow 0.2s ease-in-out;
+    &:hover {
+      box-shadow: 0px 0px 15px rgba(230, 230, 230, 0.4);
+    }
   }
 `;
 

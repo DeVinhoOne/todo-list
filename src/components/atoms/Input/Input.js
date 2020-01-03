@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ValueContext } from '../../../context/value-context';
 
 const StyledWrapper = styled.div`
-  margin-top: 45px;
+  margin-bottom: 30px;
   position: relative;
-  width: 500px;
+  width: 100%;
   height: 30px;
 
   &::before {
@@ -26,12 +26,24 @@ const StyledLabel = styled.label`
   line-height: 30px;
   top: 0;
   left: 0;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 300;
   color: ${({ theme }) => theme.lightGray};
   opacity: 0.3;
   z-index: -1;
   transition: all 0.1s ease-in-out;
+
+  @media (min-width: 380px) {
+    font-size: 2rem;
+  }
+
+  @media (min-width: 670px) {
+    font-size: 2.2rem;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -50,7 +62,16 @@ const StyledInput = styled.input`
 
   &:focus ~ ${StyledLabel} {
     transform: translateY(-100%);
-    font-size: 1.9rem;
+    font-size: 1.5rem;
+    @media (min-width: 380px) {
+      font-size: 1.7rem;
+    }
+    @media (min-width: 670px) {
+      font-size: 1.8rem;
+    }
+    @media (min-width: 1000px) {
+      font-size: 1.9rem;
+    }
   }
 `;
 

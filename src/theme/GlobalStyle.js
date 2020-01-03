@@ -17,8 +17,7 @@ const GlobalStyle = createGlobalStyle`
    body {
       background-color: ${props => props.theme.darkBackground};
       font-size: 1.6rem;
-      display: flex;
-      justify-content: center;
+      padding: 60px 30px;
    }
 `;
 

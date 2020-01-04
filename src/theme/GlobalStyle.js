@@ -12,12 +12,19 @@ const GlobalStyle = createGlobalStyle`
 
    html {
       font-size: 62.5%;
+      height: 100%;
    }
 
    body {
       background-color: ${props => props.theme.darkBackground};
       font-size: 1.6rem;
-      padding: 60px 30px;
+      height: 100%;
+   }
+
+   #root {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
    }
 `;
 

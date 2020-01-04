@@ -6,12 +6,14 @@ import Panel from '../components/molecules/Panel/Panel';
 import Task from '../components/atoms/Task/Task';
 import { ValueContext } from '../context/value-context';
 import { DeleteContext } from '../context/delete-context';
+import Footer from '../components/atoms/Footer/Footer';
 
 const TasksWrapper = styled.div`
   margin-top: 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 `;
 
 const Root = () => {
@@ -53,6 +55,7 @@ const Root = () => {
           </DeleteContext.Provider>
         ))}
       </TasksWrapper>
+      <Footer />
     </ThemeProvider>
   );
 };

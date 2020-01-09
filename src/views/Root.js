@@ -59,4 +59,5 @@ const Root = () => {
     </ThemeProvider>
   );
 };
+
 export default Root;

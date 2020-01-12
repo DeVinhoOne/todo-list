@@ -7,7 +7,6 @@ const StyledButton = styled.button`
   height: 48px;
   font-size: 2.2rem;
   font-weight: 300;
-  border-radius: 50px;
   color: ${({ theme }) => theme.lightGray};
   border: none;
   padding: 0;
@@ -31,10 +30,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const AddButton = () => (
+const Button = ({ children }) => (
   <ValueContext.Consumer>
-    {value => <StyledButton onClick={value.handleAddition}>Add</StyledButton>}
+    {value => <StyledButton onClick={value.handleAddition}>{children}</StyledButton>}
   </ValueContext.Consumer>
 );
 
-export default AddButton;
+export default Button;

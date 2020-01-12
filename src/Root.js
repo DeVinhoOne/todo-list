@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import theme from '../theme/theme';
-import GlobalStyle from '../theme/GlobalStyle';
-import Panel from '../components/molecules/Panel/Panel';
-import Task from '../components/atoms/Task/Task';
-import { ValueContext } from '../context/value-context';
-import { DeleteContext } from '../context/delete-context';
-import Footer from '../components/atoms/Footer/Footer';
+import { Route } from 'react-router-dom';
+import theme from './theme/theme';
+import GlobalStyle from './theme/GlobalStyle';
+import Panel from './components/molecules/Panel/Panel';
+import Task from './components/atoms/Task/Task';
+import { ValueContext } from './context/value-context';
+import { DeleteContext } from './context/delete-context';
+import Footer from './components/atoms/Footer/Footer';
+import HomePage from './views/HomePage/HomePage';
 
 const TasksWrapper = styled.div`
   margin-top: 35px;
@@ -39,7 +41,8 @@ const Root = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ValueContext.Provider
+      <Route path="/" children={<HomePage />} />
+      {/* <ValueContext.Provider
         value={{
           value,
           handleChange: text => handleInputChange(text),
@@ -55,7 +58,7 @@ const Root = () => {
           </DeleteContext.Provider>
         ))}
       </TasksWrapper>
-      <Footer />
+      <Footer /> */}
     </ThemeProvider>
   );
 };

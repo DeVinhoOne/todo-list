@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddButton from '../../atoms/AddButton/AddButton';
+import Button from '../../atoms/Button/Button';
 import Input from '../../atoms/Input/Input';
 
 const StyledWrapper = styled.div`
@@ -24,7 +24,7 @@ const StyledWrapper = styled.div`
 const Panel = () => (
   <StyledWrapper>
     <Input />
-    <AddButton />
+    <Button>Add</Button>
   </StyledWrapper>
 );
 

@@ -16,7 +16,6 @@ const StyledWrapper = styled.div`
     width: 100%;
     height: 4px;
     background: linear-gradient(90deg, hsl(9, 100%, 58%) 0%, hsl(346, 100%, 63%) 100%);
-    border-radius: 50px;
     opacity: 50%;
   }
 `;
@@ -75,7 +74,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = () => {
+const Input = ({ placeholder }) => {
   return (
     <StyledWrapper>
       <ValueContext.Consumer>
@@ -91,7 +90,7 @@ const Input = () => {
           );
         }}
       </ValueContext.Consumer>
-      <StyledLabel htmlFor="task">Enter Your Todo..</StyledLabel>
+      <StyledLabel htmlFor="task">{placeholder}</StyledLabel>
     </StyledWrapper>
   );
 };

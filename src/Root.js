@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import theme from './theme/theme';
 import GlobalStyle from './theme/GlobalStyle';
 import Panel from './components/molecules/Panel/Panel';
@@ -9,6 +9,8 @@ import { ValueContext } from './context/value-context';
 import { DeleteContext } from './context/delete-context';
 import Footer from './components/atoms/Footer/Footer';
 import HomePage from './views/HomePage/HomePage';
+import Login from './views/Login/Login';
+import SignUp from './views/SignUp/SignUp';
 
 const TasksWrapper = styled.div`
   margin-top: 35px;
@@ -41,7 +43,11 @@ const Root = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Route path="/" children={<HomePage />} />
+      <Switch>
+        <Route path="/" exact children={<HomePage />} />
+        <Route path="/login" children={<Login />} />
+        <Route path="/signup" children={<SignUp />} />
+      </Switch>
       {/* <ValueContext.Provider
         value={{
           value,

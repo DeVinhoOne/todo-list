@@ -74,9 +74,9 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ placeholder }) => {
+const Input = ({ className, placeholder }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       <ValueContext.Consumer>
         {value => {
           console.log(value);

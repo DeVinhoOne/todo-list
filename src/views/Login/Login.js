@@ -5,19 +5,21 @@ import Input from '../../components/atoms/Input/Input';
 
 const StyledWrapper = styled.div`
   margin: auto auto;
-  height: 320px;
   width: 50vw;
   max-width: 370px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+`;
+
+const StyledInput = styled(Input)`
+  margin-bottom: 60px;
 `;
 
 const Login = () => (
   <StyledWrapper>
-    <Input placeholder="E-mail" />
-    <Input placeholder="Password" />
+    <StyledInput placeholder="E-mail" />
+    <StyledInput placeholder="Password" />
     <Button>Login</Button>
   </StyledWrapper>
 );

@@ -39,9 +39,9 @@ const StyledParagraph = styled.p`
   }
 `;
 
-const Task = ({ children }) => (
+const Task = ({ children, index }) => (
   <StyledWrapper>
-    <DeleteButton />
+    <DeleteButton index={index} />
     <StyledParagraph>{children}</StyledParagraph>
   </StyledWrapper>
 );

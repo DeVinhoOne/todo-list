@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ValueContext } from '../../../context/value-context';
+import { TodosContext } from '../../../context/todos-context';
 
 const StyledButton = styled.button`
   width: 160px;
@@ -31,9 +31,9 @@ const StyledButton = styled.button`
 `;
 
 const Button = ({ children }) => (
-  <ValueContext.Consumer>
-    {value => <StyledButton onClick={value.handleAddition}>{children}</StyledButton>}
-  </ValueContext.Consumer>
+  <TodosContext.Consumer>
+    {({ handleAddition }) => <StyledButton onClick={handleAddition}>{children}</StyledButton>}
+  </TodosContext.Consumer>
 );
 
 export default Button;

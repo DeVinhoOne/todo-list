@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../../../assets/icons/delete.svg';
-import { DeleteContext } from '../../../context/delete-context';
+import { TodosContext } from '../../../context/todos-context';
 
 const StyledIcon = styled.img`
   position: absolute;
@@ -39,14 +39,14 @@ const StyledButton = styled.button`
   }
 `;
 
-const DeleteButton = ({ className }) => (
-  <DeleteContext.Consumer>
-    {value => (
-      <StyledButton onClick={value} className={className}>
+const DeleteButton = ({ className, index }) => (
+  <TodosContext.Consumer>
+    {({ handleTaskDelete }) => (
+      <StyledButton onClick={() => handleTaskDelete(index)} className={className}>
         <StyledIcon src={deleteIcon} alt="" />
       </StyledButton>
     )}
-  </DeleteContext.Consumer>
+  </TodosContext.Consumer>
 );
 
 export default DeleteButton;

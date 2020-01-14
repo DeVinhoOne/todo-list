@@ -5,7 +5,7 @@ import Input from '../../atoms/Input/Input';
 
 const StyledWrapper = styled.div`
   margin: 60px auto;
-  margin-bottom: 0;
+  margin-bottom: 35px;
   width: 70vw;
   display: flex;
   flex-direction: column;

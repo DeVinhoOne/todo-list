@@ -74,10 +74,10 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ className, placeholder, value, changeHandler }) => {
+const Input = ({ className, placeholder, type, value, changeHandler }) => {
   return (
     <StyledWrapper className={className}>
-      <StyledInput type="text" id="task" value={value} onChange={changeHandler} />
+      <StyledInput type={type} value={value} onChange={changeHandler} />
       <StyledLabel htmlFor="task">{placeholder}</StyledLabel>
     </StyledWrapper>
   );

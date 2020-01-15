@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { firebaseConfig } from '../../firebase/firebaseConfig';
 import Button from '../../components/atoms/Button/Button';
 import Input from '../../components/atoms/Input/Input';
 
@@ -45,16 +44,19 @@ const SignUp = () => {
     <StyledWrapper>
       <StyledInput
         placeholder="E-mail"
+        type="email"
         value={email}
         changeHandler={e => setEmail(e.target.value)}
       />
       <StyledInput
         placeholder="First name"
+        type="text"
         value={firstName}
         changeHandler={e => setFirstName(e.target.value)}
       />
       <StyledInput
         placeholder="Password"
+        type="password"
         value={password}
         changeHandler={e => setPassword(e.target.value)}
       />
@@ -63,5 +65,4 @@ const SignUp = () => {
   );
 };
 
-// firebase.initializeApp(firebaseConfig);
 export default SignUp;

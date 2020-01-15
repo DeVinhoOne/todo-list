@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import * as firebase from 'firebase/app';
@@ -6,7 +6,6 @@ import 'firebase/auth';
 import { firebaseConfig } from './firebase/firebaseConfig';
 import theme from './theme/theme';
 import GlobalStyle from './theme/GlobalStyle';
-import { TodosContext } from './context/todos-context';
 // import Footer from './components/atoms/Footer/Footer';
 import HomePage from './views/HomePage/HomePage';
 import Login from './views/Login/Login';

@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import Button from '../../components/atoms/Button/Button';
 import Input from '../../components/atoms/Input/Input';
 
@@ -16,12 +18,43 @@ const StyledInput = styled(Input)`
   margin-bottom: 60px;
 `;
 
-const Login = () => (
-  <StyledWrapper>
-    <StyledInput placeholder="E-mail" />
-    <StyledInput placeholder="Password" />
-    <Button>Login</Button>
-  </StyledWrapper>
-);
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginUser = () => {
+    if (email && password) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      console.log('Error!');
+    }
+  };
+
+  return (
+    <StyledWrapper>
+      <StyledInput
+        placeholder="E-mail"
+        type="e-mail"
+        value={email}
+        changeHandler={e => setEmail(e.target.value)}
+      />
+      <StyledInput
+        placeholder="Password"
+        type="password"
+        value={password}
+        changeHandler={e => setPassword(e.target.value)}
+      />
+      <Button submitNewUser={loginUser}>Login</Button>
+    </StyledWrapper>
+  );
+};
 
 export default Login;

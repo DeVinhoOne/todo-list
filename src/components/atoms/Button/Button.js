@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TodosContext } from '../../../context/todos-context';
 
 const StyledButton = styled.button`
   width: 160px;

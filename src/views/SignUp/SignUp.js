@@ -5,7 +5,7 @@ import 'firebase/auth';
 import Button from '../../components/atoms/Button/Button';
 import Input from '../../components/atoms/Input/Input';
 
-const StyledWrapper = styled.div`
+const StyledForm = styled.form`
   margin: auto auto;
   width: 50vw;
   max-width: 370px;
@@ -24,7 +24,8 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
 
-  const createNewUser = () => {
+  const createNewUser = e => {
+    e.preventDefault();
     if (email && password) {
       firebase
         .auth()
@@ -41,13 +42,8 @@ const SignUp = () => {
   };
 
   return (
-    <StyledWrapper>
-      <StyledInput
-        placeholder="E-mail"
-        type="email"
-        value={email}
-        changeHandler={e => setEmail(e.target.value)}
-      />
+    <StyledForm onSubmit={e => createNewUser(e)}>
+      <StyledInput placeholder="E-mail" type="email" value={email} changeHandler={e => setEmail(e.target.value)} />
       <StyledInput
         placeholder="First name"
         type="text"
@@ -60,8 +56,10 @@ const SignUp = () => {
         value={password}
         changeHandler={e => setPassword(e.target.value)}
       />
-      <Button submitNewUser={createNewUser}>Sign Up</Button>
-    </StyledWrapper>
+      <Button type="submit" submitUser={createNewUser}>
+        Sign Up
+      </Button>
+    </StyledForm>
   );
 };
 

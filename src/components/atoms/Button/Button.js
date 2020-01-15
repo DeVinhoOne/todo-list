@@ -29,8 +29,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, submitNewUser }) => (
-  <StyledButton onClick={submitNewUser}>{children}</StyledButton>
+const Button = ({ children, submitUser }) => (
+  <StyledButton onClick={submitUser}>{children}</StyledButton>
 );
 
 export default Button;

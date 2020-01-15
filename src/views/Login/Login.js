@@ -52,7 +52,7 @@ const Login = () => {
         value={password}
         changeHandler={e => setPassword(e.target.value)}
       />
-      <Button submitNewUser={loginUser}>Login</Button>
+      <Button submitUser={loginUser}>Login</Button>
     </StyledWrapper>
   );
 };

@@ -30,10 +30,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children }) => (
-  <TodosContext.Consumer>
-    {({ handleAddition }) => <StyledButton onClick={handleAddition}>{children}</StyledButton>}
-  </TodosContext.Consumer>
+const Button = ({ children, submitNewUser }) => (
+  <StyledButton onClick={submitNewUser}>{children}</StyledButton>
 );
 
 export default Button;

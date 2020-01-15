@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import { firebaseConfig } from './firebase/firebaseConfig';
 import theme from './theme/theme';
 import GlobalStyle from './theme/GlobalStyle';
 import { TodosContext } from './context/todos-context';
@@ -10,46 +13,38 @@ import Login from './views/Login/Login';
 import SignUp from './views/SignUp/SignUp';
 import App from './views/App/App';
 
-// const TasksWrapper = styled.div`
-//   margin-top: 35px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   flex: 1;
-// `;
-
 const Root = () => {
-  const [value, setValue] = useState('');
-  const [tasks, setTasks] = useState([]);
+  // const [value, setValue] = useState('');
+  // const [tasks, setTasks] = useState([]);
 
-  const handleInputChange = text => setValue(text);
+  // const handleInputChange = text => setValue(text);
 
-  const handleTaskAddition = () => {
-    if (value !== '') {
-      setTasks([...tasks, value]);
-      setValue('');
-    } else {
-      alert('Empty field. Please enter some todo.');
-    }
-  };
+  // const handleTaskAddition = () => {
+  //   if (value !== '') {
+  //     setTasks([...tasks, value]);
+  //     setValue('');
+  //   } else {
+  //     alert('Empty field. Please enter some todo.');
+  //   }
+  // };
 
-  const handleTaskDelete = index => {
-    const newArray = tasks.filter((task, i) => i !== index);
-    setTasks(newArray);
-  };
+  // const handleTaskDelete = index => {
+  //   const newArray = tasks.filter((task, i) => i !== index);
+  //   setTasks(newArray);
+  // };
 
   const app = (
-    <TodosContext.Provider
-      value={{
-        tasks,
-        value,
-        handleChange: text => handleInputChange(text),
-        handleAddition: () => handleTaskAddition(),
-        handleTaskDelete: index => handleTaskDelete(index)
-      }}
-    >
-      <App />
-    </TodosContext.Provider>
+    // <TodosContext.Provider
+    //   value={{
+    //     tasks,
+    //     value
+    //     // handleChange: text => handleInputChange(text),
+    //     // handleAddition: () => handleTaskAddition(),
+    //     // handleTaskDelete: index => handleTaskDelete(index)
+    //   }}
+    // >
+    <App />
+    // </TodosContext.Provider>
   );
 
   return (
@@ -61,17 +56,9 @@ const Root = () => {
         <Route path="/signup" children={<SignUp />} />
         <Route path="/app" children={app} />
       </Switch>
-      {/*
-      <TasksWrapper>
-        {tasks.map((task, index) => (
-          <DeleteContext.Provider value={() => handleTaskDelete(index)}>
-            <Task key={index}>{task}</Task>
-          </DeleteContext.Provider>
-        ))}
-      </TasksWrapper>
-      <Footer /> */}
     </ThemeProvider>
   );
 };
 
+firebase.initializeApp(firebaseConfig);
 export default Root;

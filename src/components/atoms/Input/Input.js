@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TodosContext } from '../../../context/todos-context';
+// import { TodosContext } from '../../../context/todos-context';
 
 const StyledWrapper = styled.div`
   margin-bottom: 30px;
@@ -74,21 +74,10 @@ const StyledInput = styled.input`
   }
 `;
 
-const Input = ({ className, placeholder }) => {
+const Input = ({ className, placeholder, value, changeHandler }) => {
   return (
     <StyledWrapper className={className}>
-      <TodosContext.Consumer>
-        {({ value, handleChange }) => {
-          return (
-            <StyledInput
-              value={value}
-              onChange={e => handleChange(e.target.value)}
-              type="text"
-              id="task"
-            />
-          );
-        }}
-      </TodosContext.Consumer>
+      <StyledInput type="text" id="task" value={value} onChange={changeHandler} />
       <StyledLabel htmlFor="task">{placeholder}</StyledLabel>
     </StyledWrapper>
   );

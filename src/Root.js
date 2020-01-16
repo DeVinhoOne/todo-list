@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
+import styled, { ThemeProvider } from 'styled-components';
+import { Route, Switch, Link } from 'react-router-dom';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { firebaseConfig } from './firebase/firebaseConfig';
@@ -12,48 +12,25 @@ import Login from './views/Login/Login';
 import SignUp from './views/SignUp/SignUp';
 import App from './views/App/App';
 
+const StyledLink = styled(Link)`
+  position: fixed;
+  top: 50px;
+  left: 60px;
+  font-size: 4rem;
+  text-decoration: none;
+  color: ${({ theme }) => theme.lightGray};
+`;
+
 const Root = () => {
-  // const [value, setValue] = useState('');
-  // const [tasks, setTasks] = useState([]);
-
-  // const handleInputChange = text => setValue(text);
-
-  // const handleTaskAddition = () => {
-  //   if (value !== '') {
-  //     setTasks([...tasks, value]);
-  //     setValue('');
-  //   } else {
-  //     alert('Empty field. Please enter some todo.');
-  //   }
-  // };
-
-  // const handleTaskDelete = index => {
-  //   const newArray = tasks.filter((task, i) => i !== index);
-  //   setTasks(newArray);
-  // };
-
-  const app = (
-    // <TodosContext.Provider
-    //   value={{
-    //     tasks,
-    //     value
-    //     // handleChange: text => handleInputChange(text),
-    //     // handleAddition: () => handleTaskAddition(),
-    //     // handleTaskDelete: index => handleTaskDelete(index)
-    //   }}
-    // >
-    <App />
-    // </TodosContext.Provider>
-  );
-
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <StyledLink to="/">Home</StyledLink>
       <Switch>
         <Route path="/" exact children={<HomePage />} />
         <Route path="/login" children={<Login />} />
         <Route path="/signup" children={<SignUp />} />
-        <Route path="/app" children={app} />
+        <Route path="/app" children={<App />} />
       </Switch>
     </ThemeProvider>
   );

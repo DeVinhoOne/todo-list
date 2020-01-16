@@ -21,40 +21,51 @@ const StyledInput = styled(Input)`
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   const createNewUser = e => {
     e.preventDefault();
-    if (email && password) {
+    if (email && password.length > 7 && password === passwordConfirm) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(data => {
-          console.log(data);
+          setEmail('');
+          setPassword('');
+          setPasswordConfirm('');
         })
         .catch(err => {
           console.log(err);
         });
-    } else {
-      console.log('Error!');
+    } else if (password !== passwordConfirm) {
+      alert('Password and Confirm password must be the same.');
     }
   };
+
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const email = user.email;
+      console.log(user);
+
+      console.log(email);
+    }
+  });
 
   return (
     <StyledForm onSubmit={e => createNewUser(e)}>
       <StyledInput placeholder="E-mail" type="email" value={email} changeHandler={e => setEmail(e.target.value)} />
       <StyledInput
-        placeholder="First name"
-        type="text"
-        value={firstName}
-        changeHandler={e => setFirstName(e.target.value)}
-      />
-      <StyledInput
         placeholder="Password"
         type="password"
         value={password}
         changeHandler={e => setPassword(e.target.value)}
+      />
+      <StyledInput
+        placeholder="Confirm password"
+        type="password"
+        value={passwordConfirm}
+        changeHandler={e => setPasswordConfirm(e.target.value)}
       />
       <Button type="submit" submitUser={createNewUser}>
         Sign Up

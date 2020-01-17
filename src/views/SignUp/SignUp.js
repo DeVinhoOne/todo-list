@@ -34,6 +34,7 @@ const SignUp = () => {
           setEmail('');
           setPassword('');
           setPasswordConfirm('');
+          console.log(data);
         })
         .catch(err => {
           console.log(err);
@@ -42,15 +43,6 @@ const SignUp = () => {
       alert('Password and Confirm password must be the same.');
     }
   };
-
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const email = user.email;
-      console.log(user);
-
-      console.log(email);
-    }
-  });
 
   return (
     <StyledForm onSubmit={e => createNewUser(e)}>

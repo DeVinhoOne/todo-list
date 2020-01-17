@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextLink from '../../components/atoms/TextLink/TextLink';
 import HeroImage from '../../assets/images/hero-image.svg';
 
 const StyledWrapper = styled.div`
@@ -42,6 +41,10 @@ const StyledHeroText = styled.h1`
   @media (min-width: 1600px) {
     font-size: 8rem;
   }
+`;
+
+const StyledSpan = styled.span`
+  color: ${({ theme }) => theme.pink};
 `;
 
 const StyledStart = styled.span`
@@ -104,7 +107,7 @@ const HomePage = () => (
   <StyledWrapper>
     <StyledHeroText>
       Welcome anonymous,
-      <br /> <TextLink url="/signup">Sign up</TextLink> or <TextLink url="/login">Login</TextLink>
+      <br /> <StyledSpan>Sign up</StyledSpan> or <StyledSpan>Login</StyledSpan>
       <br /> to <StyledStart>Start.</StyledStart>
     </StyledHeroText>
     <StyledImage src={HeroImage} alt="" />

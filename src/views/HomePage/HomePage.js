@@ -33,6 +33,10 @@ const StyledHeroText = styled.h1`
   @media (min-width: 1600px) {
     font-size: 8rem;
   }
+
+  @media (min-width: 1921px) {
+    font-size: calc(3rem + 3vw);
+  }
 `;
 
 const StyledSpan = styled.span`
@@ -92,6 +96,11 @@ const StyledImage = styled.img`
 
   @media (min-width: 750px) {
     width: 45%;
+  }
+
+  @media (min-width: 1921px) {
+    max-width: 1200px;
+    width: 50%;
   }
 `;
 

@@ -32,14 +32,39 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const Navbar = () => (
-  <StyledWrapper>
-    <TextLogo />
+const StyledLogout = styled.button`
+  background-color: transparent;
+  border: none;
+  height: 70px;
+  font-size: 1.7rem;
+  font-weight: ${({ theme }) => theme.font.bold};
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  color: ${({ theme }) => theme.pink};
+  cursor: pointer;
+
+  @media (min-width: 550px) {
+    font-size: calc(1.2rem + 1vw);
+  }
+`;
+
+const Navbar = ({ isLoggedIn, logoutUser }) => {
+  let links = (
     <LinksWrapper>
       <TextLink url="/signup">Sign Up</TextLink>
       <TextLink url="/login">Login</TextLink>
     </LinksWrapper>
-  </StyledWrapper>
-);
+  );
+
+  if (isLoggedIn) {
+    links = <StyledLogout onClick={logoutUser}>Logout</StyledLogout>;
+  }
+  return (
+    <StyledWrapper>
+      <TextLogo />
+      {links}
+    </StyledWrapper>
+  );
+};
 
 export default Navbar;

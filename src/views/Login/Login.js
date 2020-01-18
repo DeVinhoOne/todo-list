@@ -24,23 +24,19 @@ const Login = () => {
 
   const loginUser = e => {
     e.preventDefault();
-    if (email && password) {
-      firebase
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(data => {
-          console.log(data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else {
-      console.log('Error!');
-    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
-    <StyledForm onSubmit={e => loginUser(e)}>
+    <StyledForm onSubmit={loginUser}>
       <StyledInput placeholder="E-mail" type="e-mail" value={email} changeHandler={e => setEmail(e.target.value)} />
       <StyledInput
         placeholder="Password"
@@ -48,9 +44,7 @@ const Login = () => {
         value={password}
         changeHandler={e => setPassword(e.target.value)}
       />
-      <Button type="submit" submitUser={loginUser}>
-        Login
-      </Button>
+      <Button type="submit">Login</Button>
     </StyledForm>
   );
 };

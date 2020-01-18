@@ -26,26 +26,21 @@ const SignUp = () => {
 
   const createNewUser = e => {
     e.preventDefault();
-    if (email && password.length > 7 && password === passwordConfirm) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(data => {
-          setEmail('');
-          setPassword('');
-          setPasswordConfirm('');
-          console.log(data);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    } else if (password !== passwordConfirm) {
-      alert('Password and Confirm password must be the same.');
-    }
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        setEmail('');
+        setPassword('');
+        setPasswordConfirm('');
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
-    <StyledForm onSubmit={e => createNewUser(e)}>
+    <StyledForm onSubmit={createNewUser}>
       <StyledInput placeholder="E-mail" type="email" value={email} changeHandler={e => setEmail(e.target.value)} />
       <StyledInput
         placeholder="Password"
@@ -59,9 +54,7 @@ const SignUp = () => {
         value={passwordConfirm}
         changeHandler={e => setPasswordConfirm(e.target.value)}
       />
-      <Button type="submit" submitUser={createNewUser}>
-        Sign Up
-      </Button>
+      <Button type="submit">Sign Up</Button>
     </StyledForm>
   );
 };

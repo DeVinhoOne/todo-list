@@ -4,7 +4,7 @@ import HeroImage from '../../assets/images/hero-image.svg';
 
 const StyledWrapper = styled.div`
   margin: auto 0;
-  padding: 0 10px;
+  padding: 0 calc(10px + 2vw);
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -14,14 +14,6 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-
-  @media (min-width: 600px) {
-    padding: 0 4vw;
-  }
-
-  @media (min-width: 1100px) {
-    padding: 0 9vw;
   }
 `;
 

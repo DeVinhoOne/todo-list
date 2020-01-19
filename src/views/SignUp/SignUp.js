@@ -40,7 +40,7 @@ const SignUp = () => {
   };
 
   return (
-    <StyledForm onSubmit={createNewUser}>
+    <StyledForm onSubmit={e => createNewUser(e, email, password, passwordConfirm)}>
       <StyledInput placeholder="E-mail" type="email" value={email} changeHandler={e => setEmail(e.target.value)} />
       <StyledInput
         placeholder="Password"

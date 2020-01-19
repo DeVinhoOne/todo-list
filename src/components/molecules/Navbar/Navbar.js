@@ -57,7 +57,12 @@ const Navbar = ({ isLoggedIn, logoutUser }) => {
   );
 
   if (isLoggedIn) {
-    links = <StyledLogout onClick={logoutUser}>Logout</StyledLogout>;
+    links = (
+      <LinksWrapper>
+        <TextLink url="/app">Dashborad</TextLink>
+        <StyledLogout onClick={logoutUser}>Logout</StyledLogout>
+      </LinksWrapper>
+    );
   }
   return (
     <StyledWrapper>

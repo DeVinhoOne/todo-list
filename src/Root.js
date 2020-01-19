@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import * as firebase from 'firebase/app';
@@ -13,29 +13,56 @@ import SignUp from './views/SignUp/SignUp';
 import App from './views/App/App';
 
 const Root = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState();
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log('User is currently LOGGED IN', user);
-        setIsLoggedIn(true);
-      } else if (!user) {
-        setIsLoggedIn(false);
-      }
-    });
-  }, []);
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  });
 
-  const logoutUser = () => {
+  const loginUser = (e, email, password) => {
+    e.preventDefault();
     firebase
       .auth()
-      .signOut()
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
-        console.log('User Logged Out!');
+        setIsLoggedIn(true);
       })
-      .catch(() => {
-        console.log('Logout Error!');
+      .catch(err => {
+        console.log(err);
       });
+  };
+
+  const signupUser = (e, email, password, passwordConfirm) => {
+    e.preventDefault();
+    if (password === passwordConfirm) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
+
+  const logoutUser = () => {
+    if (isLoggedIn) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log('User Logged Out!');
+        })
+        .catch(() => {
+          console.log('Logout Error!');
+        });
+    }
   };
 
   return (
@@ -43,12 +70,24 @@ const Root = () => {
       <GlobalStyle />
       <Navbar isLoggedIn={isLoggedIn} logoutUser={logoutUser} />
       <Switch>
-        <Route path="/" exact>
-          {isLoggedIn ? <Redirect to="/app" /> : <HomePage />}
+        <Route path="/" exact children={<HomePage />} />
+        <Route path="/login">
+          {isLoggedIn ? (
+            <Redirect to="/app" />
+          ) : (
+            <Login loginUser={(e, email, password) => loginUser(e, email, password)} />
+          )}
         </Route>
-        <Route path="/login">{isLoggedIn ? <Redirect to="/app" /> : <Login />}</Route>
-        <Route path="/signup">{isLoggedIn ? <Redirect to="/app" /> : <SignUp />}</Route>
-        <Route path="/app">{isLoggedIn ? <App /> : <Redirect to="/" />}</Route>
+        <Route path="/signup">
+          {isLoggedIn ? (
+            <Redirect to="/app" />
+          ) : (
+            <SignUp
+              signupUser={(e, email, password, passwordConfirm) => signupUser(e, email, password, passwordConfirm)}
+            />
+          )}
+        </Route>
+        {isLoggedIn ? <Route path="/app" children={<App />} /> : <Redirect to="/login" />}
       </Switch>
     </ThemeProvider>
   );

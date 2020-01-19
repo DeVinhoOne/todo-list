@@ -3,22 +3,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
-  font-size: 2.8rem;
+  font-size: 1.7rem;
   font-weight: ${({ theme }) => theme.font.bold};
   letter-spacing: 0.3px;
   text-decoration: none;
   color: ${({ theme }) => theme.pink};
 
-  @media (min-width: 360px) {
-    font-size: calc(2.5rem + 2vw);
-  }
-
-  @media (min-width: 1100px) {
-    font-size: calc(2.8rem + 2vw);
-  }
-
-  @media (min-width: 1600px) {
-    font-size: 8rem;
+  @media (min-width: 550px) {
+    font-size: calc(1.2rem + 1vw);
   }
 `;
 

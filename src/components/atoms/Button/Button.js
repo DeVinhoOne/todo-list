@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TodosContext } from '../../../context/todos-context';
 
 const StyledButton = styled.button`
   width: 160px;
@@ -30,10 +29,6 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children }) => (
-  <TodosContext.Consumer>
-    {({ handleAddition }) => <StyledButton onClick={handleAddition}>{children}</StyledButton>}
-  </TodosContext.Consumer>
-);
+const Button = ({ children, type }) => <StyledButton type={type}>{children}</StyledButton>;
 
 export default Button;

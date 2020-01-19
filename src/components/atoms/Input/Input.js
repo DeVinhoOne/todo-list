@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { TodosContext } from '../../../context/todos-context';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
+// import { TodosContext } from '../../../context/todos-context';
 
 const StyledWrapper = styled.div`
   margin-bottom: 30px;
@@ -43,6 +43,25 @@ const StyledLabel = styled.label`
   @media (min-width: 1000px) {
     font-size: 2.2rem;
   }
+
+  ${({ active }) =>
+    active
+      ? css`
+          transform: translateY(-100%);
+          font-size: 1.5rem;
+          transform: translateY(-100%);
+          font-size: 1.5rem;
+          @media (min-width: 380px) {
+            font-size: 1.7rem;
+          }
+          @media (min-width: 670px) {
+            font-size: 1.8rem;
+          }
+          @media (min-width: 1000px) {
+            font-size: 1.9rem;
+          }
+        `
+      : null}
 `;
 
 const StyledInput = styled.input`
@@ -57,39 +76,18 @@ const StyledInput = styled.input`
   font-weight: 300;
   font-size: 2.2rem;
   z-index: 1;
-  padding: 0;
-
-  &:focus ~ ${StyledLabel} {
-    transform: translateY(-100%);
-    font-size: 1.5rem;
-    @media (min-width: 380px) {
-      font-size: 1.7rem;
-    }
-    @media (min-width: 670px) {
-      font-size: 1.8rem;
-    }
-    @media (min-width: 1000px) {
-      font-size: 1.9rem;
-    }
-  }
+  padding: 0 0 3px 0;
 `;
 
-const Input = ({ className, placeholder }) => {
+const Input = ({ className, placeholder, type, value, changeHandler }) => {
+  const [isLabelActive, setLabel] = useState('');
+
   return (
     <StyledWrapper className={className}>
-      <TodosContext.Consumer>
-        {({ value, handleChange }) => {
-          return (
-            <StyledInput
-              value={value}
-              onChange={e => handleChange(e.target.value)}
-              type="text"
-              id="task"
-            />
-          );
-        }}
-      </TodosContext.Consumer>
-      <StyledLabel htmlFor="task">{placeholder}</StyledLabel>
+      <StyledInput type={type} value={value} onChange={changeHandler} onFocus={() => setLabel(true)} />
+      <StyledLabel active={isLabelActive && value} htmlFor="task">
+        {placeholder}
+      </StyledLabel>
     </StyledWrapper>
   );
 };

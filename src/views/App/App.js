@@ -1,6 +1,8 @@
 import React from 'react';
+// import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import styled from 'styled-components';
-import { TodosContext } from '../../context/todos-context';
+// import { TodosContext } from '../../context/todos-context';
 import Panel from '../../components/molecules/Panel/Panel';
 import Task from '../../components/atoms/Task/Task';
 
@@ -13,15 +15,7 @@ const StyledWrapper = styled.div`
 const App = () => (
   <StyledWrapper>
     <Panel />
-    <TodosContext.Consumer>
-      {value =>
-        value.tasks.map((task, index) => (
-          <Task index={index} key={index}>
-            {task}
-          </Task>
-        ))
-      }
-    </TodosContext.Consumer>
+    <Task />
   </StyledWrapper>
 );
 

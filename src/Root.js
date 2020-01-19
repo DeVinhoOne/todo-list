@@ -1,77 +1,97 @@
 import React, { useState } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
-import { Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import { firebaseConfig } from './firebase/firebaseConfig';
 import theme from './theme/theme';
 import GlobalStyle from './theme/GlobalStyle';
-import { TodosContext } from './context/todos-context';
-// import Footer from './components/atoms/Footer/Footer';
+import Navbar from './components/molecules/Navbar/Navbar';
 import HomePage from './views/HomePage/HomePage';
 import Login from './views/Login/Login';
 import SignUp from './views/SignUp/SignUp';
 import App from './views/App/App';
 
-// const TasksWrapper = styled.div`
-//   margin-top: 35px;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   flex: 1;
-// `;
-
 const Root = () => {
-  const [value, setValue] = useState('');
-  const [tasks, setTasks] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState();
 
-  const handleInputChange = text => setValue(text);
-
-  const handleTaskAddition = () => {
-    if (value !== '') {
-      setTasks([...tasks, value]);
-      setValue('');
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      setIsLoggedIn(true);
     } else {
-      alert('Empty field. Please enter some todo.');
+      setIsLoggedIn(false);
+    }
+  });
+
+  const loginUser = (e, email, password) => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        setIsLoggedIn(true);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const signupUser = (e, email, password, passwordConfirm) => {
+    e.preventDefault();
+    if (password === passwordConfirm) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   };
 
-  const handleTaskDelete = index => {
-    const newArray = tasks.filter((task, i) => i !== index);
-    setTasks(newArray);
+  const logoutUser = () => {
+    if (isLoggedIn) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log('User Logged Out!');
+        })
+        .catch(() => {
+          console.log('Logout Error!');
+        });
+    }
   };
-
-  const app = (
-    <TodosContext.Provider
-      value={{
-        tasks,
-        value,
-        handleChange: text => handleInputChange(text),
-        handleAddition: () => handleTaskAddition(),
-        handleTaskDelete: index => handleTaskDelete(index)
-      }}
-    >
-      <App />
-    </TodosContext.Provider>
-  );
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <Navbar isLoggedIn={isLoggedIn} logoutUser={logoutUser} />
       <Switch>
         <Route path="/" exact children={<HomePage />} />
-        <Route path="/login" children={<Login />} />
-        <Route path="/signup" children={<SignUp />} />
-        <Route path="/app" children={app} />
+        <Route path="/login">
+          {isLoggedIn ? (
+            <Redirect to="/app" />
+          ) : (
+            <Login loginUser={(e, email, password) => loginUser(e, email, password)} />
+          )}
+        </Route>
+        <Route path="/signup">
+          {isLoggedIn ? (
+            <Redirect to="/app" />
+          ) : (
+            <SignUp
+              signupUser={(e, email, password, passwordConfirm) => signupUser(e, email, password, passwordConfirm)}
+            />
+          )}
+        </Route>
+        {isLoggedIn ? <Route path="/app" children={<App />} /> : <Redirect to="/login" />}
       </Switch>
-      {/*
-      <TasksWrapper>
-        {tasks.map((task, index) => (
-          <DeleteContext.Provider value={() => handleTaskDelete(index)}>
-            <Task key={index}>{task}</Task>
-          </DeleteContext.Provider>
-        ))}
-      </TasksWrapper>
-      <Footer /> */}
     </ThemeProvider>
   );
 };
 
+firebase.initializeApp(firebaseConfig);
 export default Root;

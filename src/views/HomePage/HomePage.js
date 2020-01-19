@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import TextLink from '../../components/atoms/TextLink/TextLink';
 import HeroImage from '../../assets/images/hero-image.svg';
 
 const StyledWrapper = styled.div`
   margin: auto 0;
-  padding: 0 10px;
+  padding: 0 calc(10px + 2vw);
   width: 100vw;
   display: flex;
   flex-direction: column;
@@ -15,14 +14,6 @@ const StyledWrapper = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-
-  @media (min-width: 600px) {
-    padding: 0 4vw;
-  }
-
-  @media (min-width: 1100px) {
-    padding: 0 9vw;
   }
 `;
 
@@ -42,6 +33,14 @@ const StyledHeroText = styled.h1`
   @media (min-width: 1600px) {
     font-size: 8rem;
   }
+
+  @media (min-width: 1921px) {
+    font-size: calc(3rem + 3vw);
+  }
+`;
+
+const StyledSpan = styled.span`
+  color: ${({ theme }) => theme.pink};
 `;
 
 const StyledStart = styled.span`
@@ -98,13 +97,18 @@ const StyledImage = styled.img`
   @media (min-width: 750px) {
     width: 45%;
   }
+
+  @media (min-width: 1921px) {
+    max-width: 1200px;
+    width: 50%;
+  }
 `;
 
 const HomePage = () => (
   <StyledWrapper>
     <StyledHeroText>
       Welcome anonymous,
-      <br /> <TextLink url="/signup">Sign up</TextLink> or <TextLink url="/login">Login</TextLink>
+      <br /> <StyledSpan>Sign up</StyledSpan> or <StyledSpan>Login</StyledSpan>
       <br /> to <StyledStart>Start.</StyledStart>
     </StyledHeroText>
     <StyledImage src={HeroImage} alt="" />

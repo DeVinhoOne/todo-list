@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 import Button from '../../components/atoms/Button/Button';
 import Input from '../../components/atoms/Input/Input';
 
@@ -23,16 +24,20 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const db = firebase.firestore();
 
   const createNewUser = e => {
     e.preventDefault();
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(user => {
         setEmail('');
         setPassword('');
         setPasswordConfirm('');
+        db.collection('tasks')
+          .doc(user.user.uid)
+          .set({ tasks: [] });
       })
       .catch(err => {
         console.log(err);

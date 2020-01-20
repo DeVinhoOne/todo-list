@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
 import styled from 'styled-components';
 import Panel from '../../components/molecules/Panel/Panel';
 import Task from '../../components/atoms/Task/Task';
@@ -18,12 +19,12 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user.uid);
+        console.log(user);
       } else {
         console.log('No user');
       }
     });
-  }, []);
+  }, [tasks]);
 
   const addNewTask = (value, tasks) => {
     if (value.length >= 2) {

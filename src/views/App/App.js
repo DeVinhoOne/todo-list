@@ -25,9 +25,18 @@ const App = () => {
     });
   }, []);
 
+  const addNewTask = (value, tasks) => {
+    if (value.length >= 2) {
+      setTasks(tasks.concat(value));
+      setValue('');
+    } else {
+      alert('Todo must be longer than 2 characters');
+    }
+  };
+
   return (
     <StyledWrapper>
-      <Panel value={value} setValue={e => setValue(e.target.value)} />
+      <Panel value={value} setValue={e => setValue(e.target.value)} addNewTask={() => addNewTask(value, tasks)} />
       {tasks.map((task, index) => (
         <Task key={index}>{task}</Task>
       ))}

@@ -21,10 +21,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Panel = ({ value, setValue }) => (
+const Panel = ({ value, setValue, addNewTask }) => (
   <StyledWrapper>
     <Input type="text" placeholder="Type some Todo.." value={value} changeHandler={e => setValue(e)} />
-    <Button>Add</Button>
+    <Button addNewTask={addNewTask}>Add</Button>
   </StyledWrapper>
 );
 

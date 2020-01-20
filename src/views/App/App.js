@@ -15,29 +15,47 @@ const StyledWrapper = styled.div`
 const App = () => {
   const [value, setValue] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [uid, setUid] = useState('');
+  const db = firebase.firestore();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log(user);
+        setUid(user.uid);
+        db.collection('tasks')
+          .doc(user.uid)
+          .get()
+          .then(doc => {
+            if (doc.exists) {
+              setTasks(doc.data().userTasks);
+            } else {
+              console.log('No such document!');
+            }
+          })
+          .catch(err => {
+            console.log('Error while getting document', err);
+          });
       } else {
         console.log('No user');
       }
     });
-  }, [tasks]);
+  }, []);
 
-  const addNewTask = (value, tasks) => {
-    if (value.length >= 2) {
+  const addNewTask = (value, tasks, uid) => {
+    if (value) {
       setTasks(tasks.concat(value));
+      db.collection('tasks')
+        .doc(uid)
+        .set({ userTasks: tasks.concat(value) });
       setValue('');
     } else {
-      alert('Todo must be longer than 2 characters');
+      alert('Empty field!');
     }
   };
 
   return (
     <StyledWrapper>
-      <Panel value={value} setValue={e => setValue(e.target.value)} addNewTask={() => addNewTask(value, tasks)} />
+      <Panel value={value} setValue={e => setValue(e.target.value)} addNewTask={() => addNewTask(value, tasks, uid)} />
       {tasks.map((task, index) => (
         <Task key={index}>{task}</Task>
       ))}

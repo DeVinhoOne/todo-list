@@ -37,7 +37,7 @@ const SignUp = () => {
         setPasswordConfirm('');
         db.collection('tasks')
           .doc(user.user.uid)
-          .set({ tasks: [] });
+          .set({ userTasks: [] });
       })
       .catch(err => {
         console.log(err);

@@ -21,9 +21,9 @@ const StyledWrapper = styled.div`
   }
 `;
 
-const Panel = () => (
+const Panel = ({ value, setValue }) => (
   <StyledWrapper>
-    <Input />
+    <Input type="text" placeholder="Type some Todo.." value={value} changeHandler={e => setValue(e)} />
     <Button>Add</Button>
   </StyledWrapper>
 );

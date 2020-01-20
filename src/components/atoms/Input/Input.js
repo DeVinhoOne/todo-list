@@ -84,7 +84,7 @@ const Input = ({ className, placeholder, type, value, changeHandler }) => {
 
   return (
     <StyledWrapper className={className}>
-      <StyledInput type={type} value={value} onChange={changeHandler} onFocus={() => setLabel(true)} />
+      <StyledInput type={type} value={value} onChange={e => changeHandler(e)} onFocus={() => setLabel(true)} />
       <StyledLabel active={isLabelActive && value} htmlFor="task">
         {placeholder}
       </StyledLabel>

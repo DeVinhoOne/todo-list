@@ -19,26 +19,34 @@ const App = () => {
   const db = firebase.firestore();
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setUid(user.uid);
-        db.collection('tasks')
-          .doc(user.uid)
-          .get()
-          .then(doc => {
-            if (doc.exists) {
-              setTasks(doc.data().userTasks);
-            } else {
-              console.log('No such document!');
-            }
-          })
-          .catch(err => {
-            console.log('Error while getting document', err);
-          });
-      } else {
-        console.log('No user');
-      }
-    });
+    let mounted = true;
+
+    if (mounted) {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          setUid(user.uid);
+          db.collection('tasks')
+            .doc(user.uid)
+            .get()
+            .then(doc => {
+              if (doc.exists) {
+                setTasks(doc.data().userTasks);
+              } else {
+                console.log('No such document!');
+              }
+            })
+            .catch(err => {
+              console.log('Error while getting document', err);
+            });
+        } else {
+          console.log('No user');
+        }
+      });
+    }
+
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const addNewTask = (value, tasks, uid) => {

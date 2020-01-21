@@ -61,11 +61,21 @@ const App = () => {
     }
   };
 
+  const deleteTask = (index, uid) => {
+    const newTasks = tasks.filter((task, taskIndex) => index !== taskIndex);
+    setTasks(newTasks);
+    db.collection('tasks')
+      .doc(uid)
+      .set({ userTasks: newTasks });
+  };
+
   return (
     <StyledWrapper>
       <Panel value={value} setValue={e => setValue(e.target.value)} addNewTask={() => addNewTask(value, tasks, uid)} />
       {tasks.map((task, index) => (
-        <Task key={index}>{task}</Task>
+        <Task deleteTask={() => deleteTask(index, uid)} key={index}>
+          {task}
+        </Task>
       ))}
     </StyledWrapper>
   );

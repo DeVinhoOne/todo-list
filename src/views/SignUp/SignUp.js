@@ -40,7 +40,17 @@ const SignUp = () => {
           .set({ userTasks: [] });
       })
       .catch(err => {
-        console.log(err);
+        if (err.code === 'auth/email-already-in-use') {
+          alert(err.message);
+          setEmail('');
+        } else if (err.code === 'auth/weak-password') {
+          alert('The password is too weak.');
+          setPassword('');
+          setPasswordConfirm('');
+        } else if (err.code === 'auth/invalid-email') {
+          alert('The email is invalid.');
+          setEmail('');
+        }
       });
   };
 

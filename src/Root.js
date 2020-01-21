@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import * as firebase from 'firebase/app';
@@ -15,13 +15,23 @@ import App from './views/App/App';
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState();
 
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
+  useEffect(() => {
+    let mounted = true;
+
+    if (mounted) {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      });
     }
-  });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const loginUser = (e, email, password) => {
     e.preventDefault();

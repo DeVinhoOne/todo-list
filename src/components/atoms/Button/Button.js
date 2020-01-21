@@ -29,6 +29,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ children, type }) => <StyledButton type={type}>{children}</StyledButton>;
+const Button = ({ children, type, addNewTask }) => (
+  <StyledButton onClick={addNewTask} type={type}>
+    {children}
+  </StyledButton>
+);
 
 export default Button;

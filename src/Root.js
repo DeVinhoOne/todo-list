@@ -35,15 +35,19 @@ const Root = () => {
 
   const loginUser = (e, email, password) => {
     e.preventDefault();
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        setIsLoggedIn(true);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (email && password) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          setIsLoggedIn(true);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      alert('Invalid value');
+    }
   };
 
   const logoutUser = () => {

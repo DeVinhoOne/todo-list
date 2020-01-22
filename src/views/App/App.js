@@ -15,6 +15,7 @@ const StyledWrapper = styled.div`
 const App = () => {
   const [value, setValue] = useState('');
   const [tasks, setTasks] = useState([]);
+  const [name, setName] = useState('');
   const [uid, setUid] = useState('');
   const db = firebase.firestore();
 
@@ -31,6 +32,7 @@ const App = () => {
             .then(doc => {
               if (doc.exists) {
                 setTasks(doc.data().userTasks);
+                setName(doc.data().name);
               } else {
                 console.log('No such document!');
               }
@@ -49,12 +51,12 @@ const App = () => {
     };
   }, []);
 
-  const addNewTask = (value, tasks, uid) => {
+  const addNewTask = (value, tasks, uid, name) => {
     if (value) {
       setTasks(tasks.concat(value));
       db.collection('tasks')
         .doc(uid)
-        .set({ userTasks: tasks.concat(value) });
+        .set({ userTasks: tasks.concat(value), name });
       setValue('');
     } else {
       alert('Empty field!');
@@ -66,14 +68,18 @@ const App = () => {
     setTasks(newTasks);
     db.collection('tasks')
       .doc(uid)
-      .set({ userTasks: newTasks });
+      .set({ userTasks: newTasks, name });
   };
 
   return (
     <StyledWrapper>
-      <Panel value={value} setValue={e => setValue(e.target.value)} addNewTask={() => addNewTask(value, tasks, uid)} />
+      <Panel
+        value={value}
+        setValue={e => setValue(e.target.value)}
+        addNewTask={() => addNewTask(value, tasks, uid, name)}
+      />
       {tasks.map((task, index) => (
-        <Task deleteTask={() => deleteTask(index, uid)} key={index}>
+        <Task deleteTask={() => deleteTask(index, uid, name)} key={index}>
           {task}
         </Task>
       ))}

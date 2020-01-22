@@ -25,7 +25,7 @@ const StyledLabel = styled.label`
   line-height: 30px;
   top: 0;
   left: 0;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: ${({ theme }) => theme.lightGray};
   opacity: 0.3;
@@ -34,10 +34,6 @@ const StyledLabel = styled.label`
 
   @media (min-width: 380px) {
     font-size: 2rem;
-  }
-
-  @media (min-width: 670px) {
-    font-size: 2.2rem;
   }
 
   @media (min-width: 1000px) {

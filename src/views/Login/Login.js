@@ -6,7 +6,7 @@ import Input from '../../components/atoms/Input/Input';
 
 const StyledForm = styled.form`
   margin: auto auto;
-  width: 50vw;
+  width: 70vw;
   max-width: 370px;
   display: flex;
   flex-direction: column;

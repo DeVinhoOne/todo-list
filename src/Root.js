@@ -46,21 +46,6 @@ const Root = () => {
       });
   };
 
-  const signupUser = (e, email, password, passwordConfirm) => {
-    e.preventDefault();
-    if (password === passwordConfirm) {
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          setIsLoggedIn(true);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-  };
-
   const logoutUser = () => {
     if (isLoggedIn) {
       firebase
@@ -88,15 +73,7 @@ const Root = () => {
             <Login loginUser={(e, email, password) => loginUser(e, email, password)} />
           )}
         </Route>
-        <Route path="/signup">
-          {isLoggedIn ? (
-            <Redirect to="/app" />
-          ) : (
-            <SignUp
-              signupUser={(e, email, password, passwordConfirm) => signupUser(e, email, password, passwordConfirm)}
-            />
-          )}
-        </Route>
+        <Route path="/signup">{isLoggedIn ? <Redirect to="/app" /> : <SignUp />}</Route>
         {isLoggedIn ? <Route path="/app" children={<App />} /> : <Redirect to="/login" />}
       </Switch>
     </ThemeProvider>
